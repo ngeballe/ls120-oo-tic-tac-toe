@@ -23,7 +23,32 @@ class Player
   end
 end
 
-def TTTGame
+class TTTGame
+  def display_welcome_message
+    puts "Let's play Tic Tac Toe!"
+  end
+
+  def display_board
+  end
+
+  def first_player_moves
+  end
+
+  def second_player_moves
+  end
+
+  def someone_won?
+  end
+
+  def board_full?
+  end
+
+  def display_result
+  end
+
+  def display_goodbye_message
+  end
+
   def play
     display_welcome_message
     loop do
