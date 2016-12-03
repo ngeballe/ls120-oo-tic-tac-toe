@@ -51,12 +51,12 @@ class Board
   end
 
   def reset
-    (1..9).each {|key| @squares[key] = Square.new}
+    (1..9).each { |key| @squares[key] = Square.new }
   end
 end
 
 class Square
-  INITIAL_MARKER = " "
+  INITIAL_MARKER = " ".freeze
 
   attr_accessor :marker
 
@@ -82,8 +82,8 @@ class Player
 end
 
 class TTTGame
-  HUMAN_MARKER = 'X'
-  COMPUTER_MARKER = 'O'
+  HUMAN_MARKER = 'X'.freeze
+  COMPUTER_MARKER = 'O'.freeze
 
   attr_reader :board, :human, :computer
 
