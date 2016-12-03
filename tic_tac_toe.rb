@@ -181,6 +181,10 @@ class TTTGame
     puts ""
   end
 
+  def game_over?
+    board.someone_won? || board.full?
+  end
+
   def play
     clear
     display_welcome_message
@@ -189,10 +193,10 @@ class TTTGame
 
       loop do
         human_moves
-        break if board.someone_won? || board.full?
+        break if game_over?
 
         computer_moves
-        break if board.someone_won? || board.full?
+        break if game_over?
 
         clear_screen_and_display_board
       end
