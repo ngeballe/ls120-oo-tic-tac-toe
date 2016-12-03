@@ -1,5 +1,3 @@
-require 'pry'
-
 class Board
   WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] + # rows
                   [[1, 4, 7], [2, 5, 8], [3, 6, 9]] + # cols
@@ -8,20 +6,6 @@ class Board
   def initialize
     @squares = {}
     reset
-  end
-
-  def draw
-    puts "     |     |"
-    puts "  #{@squares[1]}  |  #{@squares[2]}  |  #{@squares[3]}"
-    puts "     |     |"
-    puts "-----+-----+-----"
-    puts "     |     |"
-    puts "  #{@squares[4]}  |  #{@squares[5]}  |  #{@squares[6]}"
-    puts "     |     |"
-    puts "-----+-----+-----"
-    puts "     |     |"
-    puts "  #{@squares[7]}  |  #{@squares[8]}  |  #{@squares[9]}"
-    puts "     |     |"
   end
 
   def []=(num, marker)
@@ -54,6 +38,22 @@ class Board
     (1..9).each { |key| @squares[key] = Square.new }
   end
 
+  # rubocop:disable Metrics/AbcSize
+  def draw
+    puts "     |     |"
+    puts "  #{@squares[1]}  |  #{@squares[2]}  |  #{@squares[3]}"
+    puts "     |     |"
+    puts "-----+-----+-----"
+    puts "     |     |"
+    puts "  #{@squares[4]}  |  #{@squares[5]}  |  #{@squares[6]}"
+    puts "     |     |"
+    puts "-----+-----+-----"
+    puts "     |     |"
+    puts "  #{@squares[7]}  |  #{@squares[8]}  |  #{@squares[9]}"
+    puts "     |     |"
+  end
+  # rubocop:enable Metrics/AbcSize
+
   private
 
   def three_identical_markers?(squares)
@@ -73,15 +73,15 @@ class Square
   end
 
   def to_s
-    @marker
+    marker
   end
 
   def unmarked?
-    @marker == INITIAL_MARKER
+    marker == INITIAL_MARKER
   end
 
   def marked?
-    @marker != INITIAL_MARKER
+    marker != INITIAL_MARKER
   end
 end
 
@@ -118,11 +118,13 @@ class TTTGame
         break if board.someone_won? || board.full?
         clear_screen_and_display_board if human_turn?
       end
+
       display_result
       break unless play_again?
       reset
       display_play_again_message
     end
+
     display_goodbye_message
   end
 
@@ -182,6 +184,7 @@ class TTTGame
 
   def display_result
     clear_screen_and_display_board
+
     case board.winning_marker
     when human.marker
       puts "You won!"
@@ -195,7 +198,7 @@ class TTTGame
   def play_again?
     answer = nil
     loop do
-      puts "Do you want to play again? (y/n)"
+      puts "Would you like to play again? (y/n)"
       answer = gets.chomp.downcase
       break if %w(y n).include? answer
       puts "Sorry, must be y or n"
